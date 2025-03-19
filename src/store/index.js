@@ -1,38 +1,37 @@
-import * as redux from 'redux';
+import { createSlice, configureStore } from '@reduxjs/toolkit';
 
 const initialState = {
     counter: 0,
     showCounter: true,
 };
+// every slice needs a name
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState,
+    reducers: {
+        increment(state) {
+            state.counter++;
+            // this is still am immutable state, cause
+            // rtk uses immer.js under the hood
+        },
+        decrement(state) {
+            state.counter--;
+        },
+        increase(state, action) {
+            state.counter = state.counter + action.ammount;
+        },
+        toggleCounter(state) {
+            state.showCounter = !state.showCounter;
+        },
+    },
+});
 
-const counterReducer = (state = initialState, action) => {
-    if (action.type === 'INCREMENT') {
-        return {
-            counter: state.counter + 1,
-            showCounter: state.showCounter,
-        };
-    }
-    if (action.type === 'DECREMENT') {
-        return {
-            counter: state.counter - 1,
-            showCounter: state.showCounter,
-        };
-    }
-    if (action.type === 'INCREASE') {
-        return {
-            counter: state.counter + action.amount,
-            showCounter: state.showCounter,
-        };
-    }
-    if (action.type === 'TOGGLE') {
-        return {
-            counter: state.counter,
-            showCounter: !state.showCounter,
-        };
-    }
-    return state;
-};
-
-const store = redux.createStore(counterReducer);
+const store = configureStore({
+    // // if we have more than one slice
+    // reducer: {
+    //     counter: counterSlice.reducer,
+    // },
+    reducer: counterSlice.reducer,
+});
 
 export default store;
