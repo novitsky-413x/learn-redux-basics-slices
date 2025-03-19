@@ -1,5 +1,5 @@
 {
-    "name": "learn-redux-basics",
+    "name": "learn-redux-basics-slices",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
