@@ -7,8 +7,8 @@ const Counter = () => {
     // A function which will be executed by a React Redux,
     // a function which then basically determines which piece
     // of data we wanna extract from our store.
-    const counter = useSelector((state) => state.counter);
-    const show = useSelector((state) => state.showCounter);
+    const counter = useSelector((state) => state.counter.counter);
+    const show = useSelector((state) => state.counter.showCounter);
     const dispatch = useDispatch();
 
     const incrementHandler = () => {
